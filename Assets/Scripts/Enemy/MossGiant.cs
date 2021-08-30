@@ -35,7 +35,7 @@ public class MossGiant : Enemy
         else
         {
             _renderer.flipX = false;
-        }
+        }   
         if (transform.position == pointA.position)
         {
             _currentTarget = pointB.position;
