@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
 
     private Rigidbody2D _rigid;
@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     private SpriteRenderer _playerSprite;
     private SpriteRenderer _swordArcSprite;
 
+    public int health { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
     void Start()
     {
@@ -103,7 +104,10 @@ public class Player : MonoBehaviour
         _resetJump = false;
     }
 
-
+    public void Damage()
+    {
+       
+    }
 }
 
 

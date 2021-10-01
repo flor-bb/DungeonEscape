@@ -14,9 +14,14 @@ public class Skeleton : Enemy, IDamageable
     }
 
 
+    public override void Movement()
+    {
+        base.Movement();
+    }
+
+
     public void Damage()
     {
-
         health--;
         anim.SetTrigger("Hit");
         isHit = true;
@@ -27,8 +32,6 @@ public class Skeleton : Enemy, IDamageable
         {
             Destroy(this.gameObject);
         }
-
-
     }
 
 
