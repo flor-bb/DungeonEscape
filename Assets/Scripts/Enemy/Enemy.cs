@@ -5,6 +5,8 @@ using UnityEngine;
 public  abstract class Enemy : MonoBehaviour
 {
 
+    public GameObject diamondPrefab;
+
     [SerializeField] protected int health;
     [SerializeField] protected float speed;
     [SerializeField] protected int gems;
@@ -13,6 +15,7 @@ public  abstract class Enemy : MonoBehaviour
     protected Vector3 currentTarget;
     protected Animator anim;
     protected SpriteRenderer sprite;
+    protected bool isDead = false;
 
     protected bool isHit = false;
 
@@ -37,7 +40,11 @@ public  abstract class Enemy : MonoBehaviour
             return;
         }
 
-        Movement();
+        if (!isDead)
+        {
+            Movement();
+        }
+      
     }
 
 

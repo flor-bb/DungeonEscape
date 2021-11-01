@@ -5,6 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour, IDamageable
 {
 
+    public int diamonds;
+
     private Rigidbody2D _rigid;
     private bool _resetJump = false;
     [SerializeField] private float _speed = 5.0f;
