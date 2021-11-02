@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class Player : MonoBehaviour, IDamageable
 {
@@ -17,7 +18,9 @@ public class Player : MonoBehaviour, IDamageable
     private SpriteRenderer _playerSprite;
     private SpriteRenderer _swordArcSprite;
 
-    public int health { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    public int health;
+
+    int IDamageable.health { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
     void Start()
     {
@@ -25,13 +28,14 @@ public class Player : MonoBehaviour, IDamageable
         _playerAnim = GetComponent<PlayerAnimation>();
         _playerSprite = GetComponentInChildren<SpriteRenderer>();
         _swordArcSprite = transform.GetChild(1).GetComponent<SpriteRenderer>();
+        health = 4;
     }
 
     void Update()
     {
         Movement();
 
-        if (Input.GetMouseButtonDown(0) && IsGrounded())
+        if (CrossPlatformInputManager.GetButtonDown("A_Button") && IsGrounded())
         {
             _playerAnim.Attack();
         }
@@ -39,13 +43,14 @@ public class Player : MonoBehaviour, IDamageable
 
     private void Movement()
     {
-        float move = Input.GetAxisRaw("Horizontal");
+        float move = CrossPlatformInputManager.GetAxis("Horizontal");  //Input.GetAxisRaw("Horizontal");
 
         _grounded = IsGrounded();
 
         Flip(move);
 
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+        //Here we Jump
+        if ((Input.GetKeyDown(KeyCode.Space) || CrossPlatformInputManager.GetButtonDown("B_Button")) && IsGrounded())
         {
             _rigid.velocity = new Vector2(_rigid.velocity.x, _jumpForce);
             StartCoroutine(ResetJumpRoutine());
@@ -108,7 +113,26 @@ public class Player : MonoBehaviour, IDamageable
 
     public void Damage()
     {
+
+        if (health <= 0)
+        {
+            return;
+        }
+        health--;
+        UIManager.Instance.UpdateLives(health);
+
+        if(health <= 0)
+        {
+            _playerAnim.Death();
+        }
+
        
+    }
+
+    public void AddGems(int amount)
+    {
+        diamonds += amount;
+        UIManager.Instance.UpdateGemCount(diamonds);
     }
 }
 

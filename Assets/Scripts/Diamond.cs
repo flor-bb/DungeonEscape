@@ -15,7 +15,7 @@ public class Diamond : MonoBehaviour
 
             if (player != null)
             {
-                player.diamonds += gems;
+                player.AddGems(gems);
                 Destroy(this.gameObject);
             }
   

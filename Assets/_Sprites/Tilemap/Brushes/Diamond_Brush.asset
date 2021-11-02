@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Diamond_Brush
   m_EditorClassIdentifier: 
   m_Prefabs:
-  - {fileID: 307840746501852246, guid: f740059e1c409074a88ef48b47bbb932, type: 3}
+  - {fileID: 9085858818019679945, guid: 0cccb0b8dca7767438364eb414be41f5, type: 3}
   m_PerlinScale: 0.5
   m_Z: 0
