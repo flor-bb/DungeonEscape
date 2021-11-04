@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour, IDamageable
 {
@@ -121,11 +122,17 @@ public class Player : MonoBehaviour, IDamageable
         health--;
         UIManager.Instance.UpdateLives(health);
 
-        if(health <= 0)
+        if (health <= 0)
         {
-            _playerAnim.Death();
-        }
 
+
+            _playerAnim.Death();
+
+            StartCoroutine(waitForMainMenu());
+
+            
+
+        }
        
     }
 
@@ -133,6 +140,16 @@ public class Player : MonoBehaviour, IDamageable
     {
         diamonds += amount;
         UIManager.Instance.UpdateGemCount(diamonds);
+    }
+
+
+    IEnumerator waitForMainMenu()
+    {
+
+        //Wait for 4 seconds
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("Main_Menu");
+
     }
 }
 
